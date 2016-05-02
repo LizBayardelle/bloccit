@@ -17,6 +17,7 @@ class PostsController < ApplicationController
      @post.user = current_user
 
      if @post.save
+       @post.labels = Label.update_labels(params[:post][:labels])
        flash[:notice] = "Post was saved."
        redirect_to [@topic, @post]
      else
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
        flash[:notice] = "Post was updated."
        redirect_to [@post.topic, @post]
      else
+       @post.labels = Label.update_labels(params[:post][:labels])
        flash.now[:alert] = "There was an error saving the post. Please try again."
        render :edit
      end
@@ -58,7 +60,7 @@ class PostsController < ApplicationController
    def post_params
      params.require(:post).permit(:title, :body)
    end
-   
+
    def authorize_user
      post = Post.find(params[:id])
      unless current_user == post.user || current_user.admin?
