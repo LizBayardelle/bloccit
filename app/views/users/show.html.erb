@@ -19,8 +19,38 @@
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
+<% if @user.posts.count == 0 %>
+  <h2>Posts</h2>
+  <p>Sorry, <%= @user.name %> has not submitted any posts yet.</p>
+<% else %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
+<% end %>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+<% if @user.comments.count == 0 %>
+  <h2>Comments</h2>
+  <p>Sorry, <%= @user.name %> has not submitted any comments yet.</p>
+<% else %>
+  <h2>Comments</h2>
+  <%= render @user.comments %>
+<% end %>
+
+<% if @favorite_posts.count == 0 %>
+  <h2>Favorite Posts</h2>
+  <p>Sorry, <%= @user.name %> has not favorited any posts yet.</p>
+<% else %>
+  <h2>Favorite Posts</h2>
+  <%= @favorite_posts.each do %>
+
+  <%# avatar_url = post_author_avatar(48) %>
+    <%# if avatar_url %>
+      <div class="media-left">
+        <%#= image_tag avatar_url, class: 'media-object' %>
+      </div>
+    <%# end %>
+
+    <%= render @favorite_posts %>
+    <p><%= render @favorite_posts.comments.count %> Comments</p>
+    <p><%= render @favorite_posts.votes.count %> Votes</p>
+  <% end %>
+<% end %>

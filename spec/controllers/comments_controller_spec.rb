@@ -109,4 +109,23 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
   end
+
+  describe "comment factory" do
+    before do
+      create_session(other_user)
+    end
+
+       let(:factory_comment) { create(:comment) }
+
+       it "renders the #show view" do
+         get :show, {post_id: factory_comment.post, id: factory_comment.id}
+         expect(response).to render_template :show
+       end
+
+       it "assigns factory_comment to @comment" do
+         get :show, {post_id: factory_comment.post, id: factory_comment.id}
+         expect(assigns(:comment)).to eq(factory_comment)
+       end
+     end
+
 end

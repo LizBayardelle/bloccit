@@ -11,6 +11,10 @@ class VotesController < ApplicationController
     redirect_to :back
   end
 
+  def show
+    @vote = Vote.find(params[:id])
+  end
+
   private
   def update_vote(new_value)
     @post = Post.find(params[:post_id])

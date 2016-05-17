@@ -94,6 +94,19 @@ include SessionsHelper
          expect(response).to redirect_to(my_topic)
        end
      end
-
    end
+
+   describe "not signed in" do
+       let(:factory_vote) { create(:vote) }
+
+       before do
+         create_session(other_user)
+       end
+
+       it "assigns factory_vote to @vote" do
+         get :show, {id: factory_vote.id}
+         expect(assigns(:vote)).to eq(factory_vote)
+       end
+     end
+
 end
