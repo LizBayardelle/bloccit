@@ -31,9 +31,9 @@
 <% else %>
   <div class="favorite-posts">
     <%= render partial: 'posts/favorite_post', collection: @favorite_posts, as: :post %>
-  </div> 
+  </div>
 <% end %>
-
+ 
 <% if @user.comments.count == 0 %>
   <h2>Comments</h2>
   <p>Sorry, <%= @user.name %> has not submitted any comments yet.</p>
@@ -41,4 +41,3 @@
   <h2>Comments</h2>
   <%= render @user.comments %>
 <% end %>
-
