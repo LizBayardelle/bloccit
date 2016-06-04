@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show, :create, :update]
       resources :topics, only: [:index, :show]
       resources :topics, except: [:edit, :new]
+      resources :posts, only: [:index, :show]
+      resources :posts, except: [:edit, :new]
     end
   end
 end
